@@ -36,8 +36,8 @@
             gap: 40px;
         }
         .hero-photo {
-            width: 140px;
-            height: 140px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #222;
@@ -54,12 +54,22 @@
             font-size: 1em;
             margin-top: 4px;
         }
-        .hero-text .role {
-            color: #888;
-            font-size: 0.9em;
-            margin-top: 12px;
+        .hero-text .name {
+            color: #e0e0e0;
+            font-size: 1.05em;
+            font-weight: 600;
+            margin-top: 16px;
         }
-        .hero-text .role strong { color: #e0e0e0; }
+        .hero-text .title {
+            color: #e87a1e;
+            font-size: 0.88em;
+            margin-top: 2px;
+        }
+        .hero-text .location {
+            color: #555;
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
 
         /* Layout */
         .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
@@ -80,7 +90,31 @@
         }
 
         /* About */
-        .about-text { font-size: 0.95em; max-width: 680px; }
+        .about-text { font-size: 0.95em; max-width: 720px; margin-bottom: 12px; }
+
+        /* Bio box */
+        .bio-box {
+            background: #111111;
+            border: 1px solid #1e1e1e;
+            border-radius: 8px;
+            padding: 24px 28px;
+            margin-top: 24px;
+            max-width: 720px;
+        }
+        .bio-box p {
+            font-size: 0.9em;
+            color: #999;
+            line-height: 1.7;
+        }
+        .bio-box strong { color: #e0e0e0; }
+        .bio-label {
+            color: #e87a1e;
+            font-size: 0.72em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 10px;
+        }
 
         /* Service Cards */
         .services-grid {
@@ -108,15 +142,48 @@
             line-height: 1.55;
         }
 
-        /* Teaming */
-        .teaming-box {
-            background: #111111;
-            border: 1px solid #1e1e1e;
-            border-left: 3px solid #e87a1e;
-            border-radius: 8px;
-            padding: 28px;
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88em;
+            margin-top: 4px;
         }
-        .teaming-box p { font-size: 0.92em; max-width: 680px; }
+        .comparison-table thead th {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid #e87a1e;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .comparison-table thead th:first-child {
+            color: #888;
+            border-bottom-color: #222;
+        }
+        .comparison-table thead th.us {
+            color: #e87a1e;
+        }
+        .comparison-table tbody td {
+            padding: 11px 16px;
+            border-bottom: 1px solid #151515;
+            color: #888;
+        }
+        .comparison-table tbody td:first-child {
+            color: #ccc;
+            font-weight: 500;
+        }
+        .comparison-table tbody td.us {
+            color: #c0c0c0;
+        }
+        .comparison-table tbody tr:hover {
+            background: #111111;
+        }
+        .comparison-intro {
+            font-size: 0.92em;
+            max-width: 680px;
+            margin-bottom: 24px;
+        }
 
         /* Contact */
         .contact-text { font-size: 0.92em; }
@@ -139,6 +206,9 @@
             .hero { flex-direction: column; text-align: center; padding: 40px 24px 36px; }
             .services-grid { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 1.5em; }
+            .comparison-table { font-size: 0.8em; }
+            .comparison-table thead th,
+            .comparison-table tbody td { padding: 9px 10px; }
         }
     </style>
 </head>
@@ -151,7 +221,9 @@
         <div class="hero-text">
             <h1>Crowder Enterprise Consulting</h1>
             <div class="tagline">Practical cybersecurity services for growing organizations.</div>
-            <div class="role"><strong>Edward Crowder</strong> &mdash; Principal Researcher</div>
+            <div class="name">Edward Crowder</div>
+            <div class="title">Founder &amp; Principal Researcher</div>
+            <div class="location">Ontario, Canada</div>
         </div>
     </div>
 
@@ -161,7 +233,12 @@
 
         <section>
             <div class="section-title">About</div>
-            <p class="about-text">Boutique cybersecurity consultancy founded in 2016. We help small and mid-sized organizations get their security tooling right — properly configured, tuned, and working for your environment. No overselling, no shelfware.</p>
+            <p class="about-text">Boutique cybersecurity consultancy based in Ontario, Canada, founded in 2016. We help small and mid-sized organizations get their security tooling right — properly configured, tuned, and working for your environment. No overselling, no shelfware.</p>
+
+            <div class="bio-box">
+                <div class="bio-label">Meet Edward</div>
+                <p>With a decade of experience across the global technology landscape, Edward has spoken at <strong>RSA Conference </strong> and <strong>DEF CON</strong>, and has served as a visiting researcher at the <strong>University of Waterloo</strong> and the <strong>University of Guelph</strong>. He is personally involved in every client engagement and works alongside a hand-picked group of named professionals — no mystery bench, no rotating cast of strangers.</p>
+            </div>
         </section>
 
         <section>
@@ -183,14 +260,61 @@
                     <h3>Post-Incident Recovery</h3>
                     <p>If you've been hit with ransomware or a breach, we help you get back on your feet — rebuilding, hardening, and making sure it doesn't happen again.</p>
                 </div>
+                <div class="service-card">
+                    <h3>Forward Deployed Analyst</h3>
+                    <p>Embedded security analysts who work directly alongside your team. Extra hands on deck when you need them, without the overhead of a full-time hire.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Virtual CISO</h3>
+                    <p>Strategic security leadership on a fractional basis. We help you build and maintain a security program, set priorities, and report to the board — without the executive price tag.</p>
+                </div>
             </div>
         </section>
 
         <section>
-            <div class="section-title">Right-Size Teaming</div>
-            <div class="teaming-box">
-                <p>Every organization is different. We build a team around your specific needs by drawing from our extensive professional network of trusted security practitioners. Whether you need one person for a week or a small team for a quarter, we scale to fit — not the other way around.</p>
-            </div>
+            <div class="section-title">Why Boutique</div>
+            <p class="comparison-intro">Large firms sell you a brand name and a bench of junior consultants. We give you senior practitioners who know your environment and actually do the work.</p>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="us">C/EC</th>
+                        <th>Big Consultancy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Team Composition</td>
+                        <td class="us">Right-sized to your needs from our professional network</td>
+                        <td>Pre-packaged team, often junior-heavy</td>
+                    </tr>
+                    <tr>
+                        <td>Pricing</td>
+                        <td class="us">Cost-effective, scoped to actual work</td>
+                        <td>High overhead, billable hour incentives</td>
+                    </tr>
+                    <tr>
+                        <td>Service Range</td>
+                        <td class="us">Forward deployed analyst through vCISO</td>
+                        <td>Rigid engagement tiers</td>
+                    </tr>
+                    <tr>
+                        <td>Point of Contact</td>
+                        <td class="us">Direct access to senior practitioners</td>
+                        <td>Account manager layer between you and the work</td>
+                    </tr>
+                    <tr>
+                        <td>Flexibility</td>
+                        <td class="us">Scale up or down as needs change</td>
+                        <td>Locked into long-term contracts</td>
+                    </tr>
+                    <tr>
+                        <td>Focus</td>
+                        <td class="us">Your environment, your problems</td>
+                        <td>Templated deliverables across clients</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <section>

@@ -20,55 +20,72 @@
             text-align: center;
             padding: 10px 20px;
             color: #e87a1e;
-            font-size: 0.85em;
+            font-size: 0.82em;
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
+            position: relative;
+            z-index: 10;
         }
 
         /* Hero */
         .hero {
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
             max-width: 900px;
             margin: 0 auto;
-            padding: 60px 24px 48px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
+            padding: 80px 24px 72px;
+            text-align: center;
         }
-        .hero-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #222;
-            flex-shrink: 0;
-        }
-        .hero-text h1 {
+        .logo-mark {
+            font-size: 3.6em;
+            font-weight: 800;
             color: #ffffff;
-            font-size: 1.9em;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -2px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 40px rgba(232, 122, 30, 0.15);
         }
-        .hero-text .tagline {
-            color: #666;
-            font-size: 1em;
-            margin-top: 4px;
+        .logo-mark .slash { color: #e87a1e; }
+        .hero-content h1 {
+            color: #ffffff;
+            font-size: 1.15em;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
-        .hero-text .name {
-            color: #e0e0e0;
-            font-size: 1.05em;
-            font-weight: 600;
-            margin-top: 16px;
+        .hero-content .tagline {
+            color: #777;
+            font-size: 0.95em;
+            max-width: 480px;
+            margin: 0 auto;
         }
-        .hero-text .title {
-            color: #e87a1e;
-            font-size: 0.88em;
-            margin-top: 2px;
+        .hero-content .location {
+            color: #444;
+            font-size: 0.82em;
+            margin-top: 10px;
         }
-        .hero-text .location {
-            color: #555;
-            font-size: 0.85em;
-            margin-top: 4px;
+        .hero-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, #0a0a0a);
+            z-index: 1;
         }
 
         /* Layout */
@@ -76,45 +93,16 @@
         section { margin-bottom: 56px; }
         .section-title {
             color: #e87a1e;
-            font-size: 0.75em;
+            font-size: 0.72em;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 20px;
         }
-        .divider {
-            border: none;
-            border-top: 1px solid #1a1a1a;
-            margin: 0 auto 56px;
-            max-width: 900px;
-        }
+        .spacer { height: 56px; }
 
         /* About */
-        .about-text { font-size: 0.95em; max-width: 720px; margin-bottom: 12px; }
-
-        /* Bio box */
-        .bio-box {
-            background: #111111;
-            border: 1px solid #1e1e1e;
-            border-radius: 8px;
-            padding: 24px 28px;
-            margin-top: 24px;
-            max-width: 720px;
-        }
-        .bio-box p {
-            font-size: 0.9em;
-            color: #999;
-            line-height: 1.7;
-        }
-        .bio-box strong { color: #e0e0e0; }
-        .bio-label {
-            color: #e87a1e;
-            font-size: 0.72em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin-bottom: 10px;
-        }
+        .about-text { font-size: 0.93em; max-width: 680px; }
 
         /* Who We Serve */
         .serve-intro {
@@ -132,7 +120,7 @@
             border: 1px solid #1e1e1e;
             border-radius: 8px;
             padding: 20px 22px;
-            font-size: 0.9em;
+            font-size: 0.88em;
             color: #ccc;
             line-height: 1.5;
             position: relative;
@@ -148,9 +136,9 @@
             font-size: 1em;
         }
         .serve-closer {
-            font-size: 0.9em;
+            font-size: 0.88em;
             margin-top: 20px;
-            color: #777;
+            color: #666;
             max-width: 680px;
         }
 
@@ -170,12 +158,12 @@
         .service-card:hover { border-color: #e87a1e; }
         .service-card h3 {
             color: #ffffff;
-            font-size: 0.95em;
+            font-size: 0.93em;
             font-weight: 600;
             margin-bottom: 8px;
         }
         .service-card p {
-            font-size: 0.85em;
+            font-size: 0.84em;
             color: #777;
             line-height: 1.55;
         }
@@ -184,7 +172,7 @@
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.88em;
+            font-size: 0.86em;
             margin-top: 4px;
         }
         .comparison-table thead th {
@@ -199,9 +187,7 @@
             color: #888;
             border-bottom-color: #222;
         }
-        .comparison-table thead th.us {
-            color: #e87a1e;
-        }
+        .comparison-table thead th.us { color: #e87a1e; }
         .comparison-table tbody td {
             padding: 11px 16px;
             border-bottom: 1px solid #151515;
@@ -211,17 +197,46 @@
             color: #ccc;
             font-weight: 500;
         }
-        .comparison-table tbody td.us {
-            color: #c0c0c0;
-        }
-        .comparison-table tbody tr:hover {
-            background: #111111;
-        }
+        .comparison-table tbody td.us { color: #c0c0c0; }
+        .comparison-table tbody tr:hover { background: #111111; }
         .comparison-intro {
             font-size: 0.92em;
             max-width: 680px;
             margin-bottom: 24px;
         }
+
+        /* Leadership */
+        .leadership {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+        }
+        .leadership-photo {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #1e1e1e;
+            flex-shrink: 0;
+        }
+        .leadership-info { flex: 1; }
+        .leadership-info .name {
+            color: #e0e0e0;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+        .leadership-info .title {
+            color: #e87a1e;
+            font-size: 0.8em;
+            margin-top: 1px;
+            margin-bottom: 10px;
+        }
+        .leadership-info p {
+            font-size: 0.86em;
+            color: #888;
+            line-height: 1.65;
+        }
+        .leadership-info strong { color: #c0c0c0; }
 
         /* Contact */
         .contact-text { font-size: 0.92em; }
@@ -241,13 +256,15 @@
 
         /* Responsive */
         @media (max-width: 640px) {
-            .hero { flex-direction: column; text-align: center; padding: 40px 24px 36px; }
+            .hero-content { padding: 56px 24px 52px; }
+            .logo-mark { font-size: 2.6em; }
             .services-grid { grid-template-columns: 1fr; }
             .serve-questions { grid-template-columns: 1fr; }
-            .hero-text h1 { font-size: 1.5em; }
+            .hero-content h1 { font-size: 1em; }
             .comparison-table { font-size: 0.8em; }
             .comparison-table thead th,
             .comparison-table tbody td { padding: 9px 10px; }
+            .leadership { flex-direction: column; align-items: center; text-align: center; }
         }
     </style>
 </head>
@@ -256,33 +273,28 @@
     <div class="banner">Not currently accepting new clients</div>
 
     <div class="hero">
-        <img src="edward.png" alt="Edward Crowder" class="hero-photo">
-        <div class="hero-text">
+        <canvas class="hero-canvas" id="networkCanvas"></canvas>
+        <div class="hero-content">
+            <div class="logo-mark">C<span class="slash">/</span>EC</div>
             <h1>Crowder Enterprise Consulting</h1>
             <div class="tagline">Practical cybersecurity services for growing international organizations.</div>
-            <div class="name">Edward Crowder</div>
-            <div class="title">Founder &amp; Principal Researcher</div>
             <div class="location">Ontario, Canada</div>
         </div>
+        <div class="hero-fade"></div>
     </div>
 
-    <hr class="divider">
+    <div class="spacer"></div>
 
     <div class="container">
 
         <section>
             <div class="section-title">About</div>
-            <p class="about-text">Boutique cybersecurity consultancy based in Ontario, Canada, founded in 2016. We help small and mid-sized organizations get their security tooling right — properly configured, tuned, and working for your environment. No overselling, no shelfware.</p>
-
-            <div class="bio-box">
-                <div class="bio-label">Meet Edward</div>
-                <p>With a decade of experience across the global technology landscape, Edward has spoken at <strong>RSA Conference 2026</strong> and <strong>DEF CON 32</strong>, and has served as a visiting researcher at the <strong>University of Waterloo</strong> and the <strong>University of Guelph</strong>. He is personally involved in every client engagement and works alongside a hand-picked group of named professionals — no mystery bench, no rotating cast of strangers.</p>
-            </div>
+            <p class="about-text">Boutique cybersecurity consultancy founded in 2016. We help small and mid-sized organizations get their security tooling right — properly configured, tuned, and working for your environment. No overselling, no shelfware.</p>
         </section>
 
         <section>
             <div class="section-title">Who We Serve</div>
-            <p class="serve-intro">We work with growing businesses that have outpaced their security posture — usually $5M–$50M in revenue, a small IT team doing their best, and no dedicated security staff yet.</p>
+            <p class="serve-intro">We work with growing businesses that have outpaced their security posture — usually a small IT team doing their best, with no dedicated security staff yet.</p>
             <div class="serve-questions">
                 <div class="serve-question">Is your IT or network team overburdened by security issues they weren't hired to handle?</div>
                 <div class="serve-question">Are you expanding internationally or opening new offices and unsure about the security implications?</div>
@@ -369,13 +381,188 @@
         </section>
 
         <section>
+            <div class="section-title">Leadership</div>
+            <div class="leadership">
+                <img src="edward.png" alt="Edward Crowder" class="leadership-photo">
+                <div class="leadership-info">
+                    <div class="name">Edward Crowder</div>
+                    <div class="title">Founder &amp; Principal Researcher</div>
+                    <p>Edward brings a decade of global technology experience to every engagement. A speaker at <strong>RSA Conference 2026</strong> and <strong>DEF CON 32</strong>, and a visiting researcher at the <strong>University of Waterloo</strong> and <strong>University of Guelph</strong>, he is personally involved in every client case alongside a hand-picked group of named professionals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <div class="section-title">Contact</div>
-            <p class="contact-text">Interested in working together in the future? Reach out at <strong>contact [at] crowdere.com</strong> and we'll let you know when availability opens up.</p>
+            <p class="contact-text">Interested in working together in the future? Reach out at <strong>contact@crowdere.com</strong> and we'll let you know when availability opens up.</p>
         </section>
 
     </div>
 
     <footer>Crowder Enterprise Consulting <span class="accent">/</span> Est. 2016</footer>
+
+    <script>
+    (function () {
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles, mouse, animId;
+
+        const CONFIG = {
+            particleCount: 80,
+            connectionDist: 150,
+            mouseRadius: 200,
+            baseSpeed: 0.3,
+            particleMinSize: 1,
+            particleMaxSize: 2.5,
+            orange: { r: 232, g: 122, b: 30 },
+            white: { r: 255, g: 255, b: 255 }
+        };
+
+        mouse = { x: -1000, y: -1000 };
+
+        function resize() {
+            const hero = canvas.parentElement;
+            width = canvas.width = hero.offsetWidth;
+            height = canvas.height = hero.offsetHeight;
+        }
+
+        function createParticle() {
+            const isOrange = Math.random() < 0.35;
+            const color = isOrange ? CONFIG.orange : CONFIG.white;
+            const brightness = isOrange ? 1 : (0.15 + Math.random() * 0.25);
+            return {
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * CONFIG.baseSpeed,
+                vy: (Math.random() - 0.5) * CONFIG.baseSpeed,
+                size: CONFIG.particleMinSize + Math.random() * (CONFIG.particleMaxSize - CONFIG.particleMinSize),
+                color: color,
+                alpha: brightness,
+                isOrange: isOrange,
+                pulseOffset: Math.random() * Math.PI * 2
+            };
+        }
+
+        function init() {
+            resize();
+            particles = [];
+            for (let i = 0; i < CONFIG.particleCount; i++) {
+                particles.push(createParticle());
+            }
+        }
+
+        function drawParticle(p, time) {
+            const pulse = p.isOrange
+                ? p.alpha * (0.6 + 0.4 * Math.sin(time * 0.002 + p.pulseOffset))
+                : p.alpha;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${p.color.r},${p.color.g},${p.color.b},${pulse})`;
+            ctx.fill();
+        }
+
+        function drawConnections(time) {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < CONFIG.connectionDist) {
+                        const opacity = (1 - dist / CONFIG.connectionDist) * 0.15;
+                        const useOrange = particles[i].isOrange || particles[j].isOrange;
+                        const c = useOrange ? CONFIG.orange : CONFIG.white;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(${c.r},${c.g},${c.b},${opacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Mouse connections
+            for (let i = 0; i < particles.length; i++) {
+                const dx = particles[i].x - mouse.x;
+                const dy = particles[i].y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < CONFIG.mouseRadius) {
+                    const opacity = (1 - dist / CONFIG.mouseRadius) * 0.25;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(mouse.x, mouse.y);
+                    ctx.strokeStyle = `rgba(${CONFIG.orange.r},${CONFIG.orange.g},${CONFIG.orange.b},${opacity})`;
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        function update() {
+            for (let p of particles) {
+                // Mouse repulsion
+                const dx = p.x - mouse.x;
+                const dy = p.y - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < CONFIG.mouseRadius && dist > 0) {
+                    const force = (1 - dist / CONFIG.mouseRadius) * 0.02;
+                    p.vx += (dx / dist) * force;
+                    p.vy += (dy / dist) * force;
+                }
+
+                // Damping
+                p.vx *= 0.99;
+                p.vy *= 0.99;
+
+                // Speed limit
+                const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+                if (speed > 1.2) {
+                    p.vx = (p.vx / speed) * 1.2;
+                    p.vy = (p.vy / speed) * 1.2;
+                }
+
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // Wrap edges
+                if (p.x < -10) p.x = width + 10;
+                if (p.x > width + 10) p.x = -10;
+                if (p.y < -10) p.y = height + 10;
+                if (p.y > height + 10) p.y = -10;
+            }
+        }
+
+        function animate(time) {
+            ctx.clearRect(0, 0, width, height);
+            update();
+            drawConnections(time);
+            for (let p of particles) {
+                drawParticle(p, time);
+            }
+            animId = requestAnimationFrame(animate);
+        }
+
+        // Events
+        const hero = canvas.parentElement;
+        hero.addEventListener('mousemove', function (e) {
+            const rect = hero.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+        hero.addEventListener('mouseleave', function () {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        });
+
+        window.addEventListener('resize', function () {
+            resize();
+        });
+
+        init();
+        animate(0);
+    })();
+    </script>
 
 </body>
 </html>

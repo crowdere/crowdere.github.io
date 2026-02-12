@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowder Enterprise Consulting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #a0a0a0;
+            line-height: 1.65;
+        }
+
+        /* Banner */
+        .banner {
+            background: #1a1008;
+            border-bottom: 1px solid #3d2a0a;
+            text-align: center;
+            padding: 10px 20px;
+            color: #e87a1e;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px 48px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #222;
+            flex-shrink: 0;
+        }
+        .hero-text h1 {
+            color: #ffffff;
+            font-size: 1.9em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .hero-text .tagline {
+            color: #666;
+            font-size: 1em;
+            margin-top: 4px;
+        }
+        .hero-text .role {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 12px;
+        }
+        .hero-text .role strong { color: #e0e0e0; }
+
+        /* Layout */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        section { margin-bottom: 56px; }
+        .section-title {
+            color: #e87a1e;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid #1a1a1a;
+            margin: 0 auto 56px;
+            max-width: 900px;
+        }
+
+        /* About */
+        .about-text { font-size: 0.95em; max-width: 680px; }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .service-card {
+            background: #111111;
+            border: 1px solid #1e1e1e;
+            border-radius: 8px;
+            padding: 24px;
+            transition: border-color 0.2s;
+        }
+        .service-card:hover { border-color: #e87a1e; }
+        .service-card h3 {
+            color: #ffffff;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .service-card p {
+            font-size: 0.85em;
+            color: #777;
+            line-height: 1.55;
+        }
+
+        /* Teaming */
+        .teaming-box {
+            background: #111111;
+            border: 1px solid #1e1e1e;
+            border-left: 3px solid #e87a1e;
+            border-radius: 8px;
+            padding: 28px;
+        }
+        .teaming-box p { font-size: 0.92em; max-width: 680px; }
+
+        /* Contact */
+        .contact-text { font-size: 0.92em; }
+        .contact-text strong { color: #e0e0e0; }
+
+        /* Footer */
+        footer {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+            color: #333;
+            font-size: 0.78em;
+        }
+        footer .accent { color: #e87a1e; }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero { flex-direction: column; text-align: center; padding: 40px 24px 36px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner">Not currently accepting new clients</div>
+
+    <div class="hero">
+        <img src="edward.png" alt="Ethan Crowder" class="hero-photo">
+        <div class="hero-text">
+            <h1>Crowder Enterprise Consulting</h1>
+            <div class="tagline">Practical cybersecurity services for growing organizations.</div>
+            <div class="role"><strong>Ethan Crowder</strong> &mdash; Principal Researcher</div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="container">
+
+        <section>
+            <div class="section-title">About</div>
+            <p class="about-text">Boutique cybersecurity consultancy founded in 2016. We help small and mid-sized organizations get their security tooling right — properly configured, tuned, and working for your environment. No overselling, no shelfware.</p>
+        </section>
+
+        <section>
+            <div class="section-title">Services</div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Security Tool Configuration</h3>
+                    <p>Get the most out of the tools you already own. SIEM tuning, log source onboarding, endpoint agent rollouts — we make sure your stack is doing what it's supposed to.</p>
+                </div>
+                <div class="service-card">
+                    <h3>MDR Deployment</h3>
+                    <p>Full MDR onboarding from scoping and agent rollout to integration and handoff. We make the transition smooth so you're not left figuring it out alone.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Detection Engineering</h3>
+                    <p>Custom detection content for your environment. We build and tune alert logic so your team spends less time on false positives and more time on what matters.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Post-Incident Recovery</h3>
+                    <p>If you've been hit with ransomware or a breach, we help you get back on your feet — rebuilding, hardening, and making sure it doesn't happen again.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">Right-Size Teaming</div>
+            <div class="teaming-box">
+                <p>Every organization is different. We build a team around your specific needs by drawing from our extensive professional network of trusted security practitioners. Whether you need one person for a week or a small team for a quarter, we scale to fit — not the other way around.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-title">Contact</div>
+            <p class="contact-text">Interested in working together in the future? Reach out at <strong>contact@crowderconsulting.com</strong> and we'll let you know when availability opens up.</p>
+        </section>
+
+    </div>
+
+    <footer>Crowder Enterprise Consulting <span class="accent">/</span> Est. 2016</footer>
+
+</body>
+</html>

@@ -116,6 +116,44 @@
             margin-bottom: 10px;
         }
 
+        /* Who We Serve */
+        .serve-intro {
+            font-size: 0.92em;
+            max-width: 680px;
+            margin-bottom: 24px;
+        }
+        .serve-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .serve-question {
+            background: #111111;
+            border: 1px solid #1e1e1e;
+            border-radius: 8px;
+            padding: 20px 22px;
+            font-size: 0.9em;
+            color: #ccc;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 40px;
+        }
+        .serve-question::before {
+            content: "?";
+            position: absolute;
+            left: 16px;
+            top: 19px;
+            color: #e87a1e;
+            font-weight: 700;
+            font-size: 1em;
+        }
+        .serve-closer {
+            font-size: 0.9em;
+            margin-top: 20px;
+            color: #777;
+            max-width: 680px;
+        }
+
         /* Service Cards */
         .services-grid {
             display: grid;
@@ -205,6 +243,7 @@
         @media (max-width: 640px) {
             .hero { flex-direction: column; text-align: center; padding: 40px 24px 36px; }
             .services-grid { grid-template-columns: 1fr; }
+            .serve-questions { grid-template-columns: 1fr; }
             .hero-text h1 { font-size: 1.5em; }
             .comparison-table { font-size: 0.8em; }
             .comparison-table thead th,
@@ -220,7 +259,7 @@
         <img src="edward.png" alt="Edward Crowder" class="hero-photo">
         <div class="hero-text">
             <h1>Crowder Enterprise Consulting</h1>
-            <div class="tagline">Practical cybersecurity services for growing organizations.</div>
+            <div class="tagline">Practical cybersecurity services for growing international organizations.</div>
             <div class="name">Edward Crowder</div>
             <div class="title">Founder &amp; Principal Researcher</div>
             <div class="location">Ontario, Canada</div>
@@ -237,8 +276,20 @@
 
             <div class="bio-box">
                 <div class="bio-label">Meet Edward</div>
-                <p>With a decade of experience across the global technology landscape, Edward has spoken at <strong>RSA Conference </strong> and <strong>DEF CON</strong>, and has served as a visiting researcher at the <strong>University of Waterloo</strong> and the <strong>University of Guelph</strong>. He is personally involved in every client engagement and works alongside a hand-picked group of named professionals — no mystery bench, no rotating cast of strangers.</p>
+                <p>With a decade of experience across the global technology landscape, Edward has spoken at <strong>RSA Conference 2026</strong> and <strong>DEF CON 32</strong>, and has served as a visiting researcher at the <strong>University of Waterloo</strong> and the <strong>University of Guelph</strong>. He is personally involved in every client engagement and works alongside a hand-picked group of named professionals — no mystery bench, no rotating cast of strangers.</p>
             </div>
+        </section>
+
+        <section>
+            <div class="section-title">Who We Serve</div>
+            <p class="serve-intro">We work with growing businesses that have outpaced their security posture — usually $5M–$50M in revenue, a small IT team doing their best, and no dedicated security staff yet.</p>
+            <div class="serve-questions">
+                <div class="serve-question">Is your IT or network team overburdened by security issues they weren't hired to handle?</div>
+                <div class="serve-question">Are you expanding internationally or opening new offices and unsure about the security implications?</div>
+                <div class="serve-question">Are your security tools not working as expected, generating too much noise, or sitting on the shelf?</div>
+                <div class="serve-question">Do you need security expertise but can't justify a full-time hire or a six-figure consulting engagement?</div>
+            </div>
+            <p class="serve-closer">If any of these sound familiar, you're exactly who we built this practice for.</p>
         </section>
 
         <section>

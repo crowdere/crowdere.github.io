@@ -4,419 +4,593 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crowder Enterprise Consulting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #a0a0a0;
-            line-height: 1.65;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --orange: #e87a1e;
+            --orange-dim: rgba(232, 122, 30, 0.12);
+            --bg: #050505;
+            --surface: #0c0c0c;
+            --surface-raised: #111111;
+            --border: #1a1a1a;
+            --border-light: #222222;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888888;
+            --text-muted: #555555;
+            --text-ghost: #333333;
         }
 
-        /* Banner */
-        .banner {
-            background: #1a1008;
-            border-bottom: 1px solid #3d2a0a;
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* === GRAIN OVERLAY === */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* === ANNOUNCEMENT BAR === */
+        .announce {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
             text-align: center;
-            padding: 10px 20px;
-            color: #e87a1e;
-            font-size: 0.82em;
-            font-weight: 600;
+            padding: 9px 24px;
+            font-size: 0.72em;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+        }
+
+        /* === NAV === */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+        }
+        .nav-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+        .nav-logo {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+        .nav-logo .slash { color: var(--orange); }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            font-size: 0.78em;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            position: relative;
-            z-index: 10;
+            transition: color 0.2s;
         }
+        .nav-links a:hover { color: var(--text-primary); }
 
-        /* Hero */
+        /* === HERO === */
         .hero {
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid #1a1a1a;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .hero-canvas {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
         }
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 80px 24px 72px;
             text-align: center;
+            padding: 80px 24px;
         }
-        .logo-mark {
-            font-size: 3.6em;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: -2px;
-            margin-bottom: 12px;
-            text-shadow: 0 0 40px rgba(232, 122, 30, 0.15);
-        }
-        .logo-mark .slash { color: #e87a1e; }
-        .hero-content h1 {
-            color: #ffffff;
-            font-size: 1.15em;
+        .hero-eyebrow {
+            font-size: 0.7em;
             font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 24px;
+        }
+        .hero-title {
+            font-size: clamp(2.4em, 5vw, 3.8em);
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .hero-title .slash { color: var(--orange); }
+        .hero-sub {
+            font-size: 1.05em;
+            font-weight: 300;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .hero-location {
+            margin-top: 32px;
+            font-size: 0.75em;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            color: var(--text-ghost);
         }
-        .hero-content .tagline {
-            color: #777;
-            font-size: 0.95em;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        .hero-content .location {
-            color: #444;
-            font-size: 0.82em;
-            margin-top: 10px;
-        }
-        .hero-fade {
+        .hero-fade-top {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: linear-gradient(to bottom, transparent, #0a0a0a);
+            top: 0; left: 0; right: 0; height: 80px;
+            background: linear-gradient(to bottom, var(--bg), transparent);
+            z-index: 1;
+        }
+        .hero-fade-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0; height: 120px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
             z-index: 1;
         }
 
-        /* Layout */
-        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-        section { margin-bottom: 56px; }
-        .section-title {
-            color: #e87a1e;
-            font-size: 0.72em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 20px;
+        /* === SECTION SYSTEM === */
+        .section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 96px 32px;
+            border-top: 1px solid var(--border);
         }
-        .spacer { height: 56px; }
-
-        /* About */
-        .about-text { font-size: 0.93em; max-width: 680px; }
-
-        /* Who We Serve */
-        .serve-intro {
-            font-size: 0.92em;
-            max-width: 680px;
+        .section-label {
+            font-size: 0.68em;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 40px;
+        }
+        .section-heading {
+            font-size: clamp(1.6em, 3vw, 2.2em);
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.8px;
+            line-height: 1.2;
+            max-width: 600px;
             margin-bottom: 24px;
         }
-        .serve-questions {
+        .section-body {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            max-width: 620px;
+            line-height: 1.75;
+        }
+
+        /* === REVEAL ANIMATION === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === WHO WE SERVE === */
+        .serve-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 40px;
         }
-        .serve-question {
-            background: #111111;
-            border: 1px solid #1e1e1e;
-            border-radius: 8px;
-            padding: 20px 22px;
-            font-size: 0.88em;
-            color: #ccc;
-            line-height: 1.5;
-            position: relative;
-            padding-left: 40px;
+        .serve-item {
+            background: var(--surface);
+            padding: 32px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: background 0.3s;
         }
-        .serve-question::before {
-            content: "?";
-            position: absolute;
-            left: 16px;
-            top: 19px;
-            color: #e87a1e;
-            font-weight: 700;
-            font-size: 1em;
+        .serve-item:hover { background: var(--surface-raised); }
+        .serve-item strong {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.92em;
+            margin-bottom: 6px;
         }
         .serve-closer {
             font-size: 0.88em;
-            margin-top: 20px;
-            color: #666;
-            max-width: 680px;
+            color: var(--text-muted);
+            margin-top: 28px;
         }
 
-        /* Service Cards */
+        /* === SERVICES === */
         .services-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 40px;
         }
-        .service-card {
-            background: #111111;
-            border: 1px solid #1e1e1e;
-            border-radius: 8px;
-            padding: 24px;
-            transition: border-color 0.2s;
+        .service-item {
+            background: var(--surface);
+            padding: 36px 28px;
+            transition: background 0.3s;
         }
-        .service-card:hover { border-color: #e87a1e; }
-        .service-card h3 {
-            color: #ffffff;
-            font-size: 0.93em;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .service-card p {
-            font-size: 0.84em;
-            color: #777;
-            line-height: 1.55;
-        }
-
-        /* Comparison Table */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.86em;
-            margin-top: 4px;
-        }
-        .comparison-table thead th {
-            text-align: left;
-            padding: 12px 16px;
-            border-bottom: 2px solid #e87a1e;
-            color: #ffffff;
-            font-weight: 600;
+        .service-item:hover { background: var(--surface-raised); }
+        .service-item h3 {
             font-size: 0.9em;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
         }
-        .comparison-table thead th:first-child {
-            color: #888;
-            border-bottom-color: #222;
-        }
-        .comparison-table thead th.us { color: #e87a1e; }
-        .comparison-table tbody td {
-            padding: 11px 16px;
-            border-bottom: 1px solid #151515;
-            color: #888;
-        }
-        .comparison-table tbody td:first-child {
-            color: #ccc;
-            font-weight: 500;
-        }
-        .comparison-table tbody td.us { color: #c0c0c0; }
-        .comparison-table tbody tr:hover { background: #111111; }
-        .comparison-intro {
-            font-size: 0.92em;
-            max-width: 680px;
-            margin-bottom: 24px;
+        .service-item p {
+            font-size: 0.82em;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
-        /* Leadership */
-        .leadership {
+        /* === COMPARISON === */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .comparison-col {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .comparison-col.us { border-color: var(--orange); }
+        .comparison-header {
+            padding: 20px 28px;
+            font-size: 0.8em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        .comparison-col.us .comparison-header {
+            color: var(--orange);
+            background: rgba(232, 122, 30, 0.04);
+            border-bottom-color: rgba(232, 122, 30, 0.15);
+        }
+        .comparison-row {
+            padding: 16px 28px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+            line-height: 1.5;
+        }
+        .comparison-row:last-child { border-bottom: none; }
+        .comparison-row .row-label {
+            font-size: 0.72em;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-ghost);
+            margin-bottom: 4px;
+        }
+        .comparison-col.us .comparison-row { color: var(--text-primary); }
+        .comparison-col.them .comparison-row { color: var(--text-muted); }
+
+        /* === LEADERSHIP === */
+        .leadership-card {
             display: flex;
             align-items: flex-start;
-            gap: 24px;
+            gap: 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 36px;
+            margin-top: 40px;
         }
         .leadership-photo {
-            width: 88px;
-            height: 88px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #1e1e1e;
+            border: 2px solid var(--border-light);
             flex-shrink: 0;
         }
-        .leadership-info { flex: 1; }
         .leadership-info .name {
-            color: #e0e0e0;
             font-size: 0.95em;
             font-weight: 600;
+            color: var(--text-primary);
         }
         .leadership-info .title {
-            color: #e87a1e;
-            font-size: 0.8em;
-            margin-top: 1px;
-            margin-bottom: 10px;
+            font-size: 0.78em;
+            font-weight: 500;
+            color: var(--orange);
+            margin-top: 2px;
+            margin-bottom: 12px;
         }
         .leadership-info p {
             font-size: 0.86em;
-            color: #888;
-            line-height: 1.65;
+            color: var(--text-secondary);
+            line-height: 1.7;
         }
         .leadership-info strong { color: #c0c0c0; }
 
-        /* Contact */
-        .contact-text { font-size: 0.92em; }
-        .contact-text strong { color: #e0e0e0; }
-
-        /* Footer */
-        footer {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 24px;
-            border-top: 1px solid #1a1a1a;
-            text-align: center;
-            color: #333;
-            font-size: 0.78em;
+        /* === CONTACT === */
+        .contact-email {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 28px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            font-size: 0.88em;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: border-color 0.2s, color 0.2s;
         }
-        footer .accent { color: #e87a1e; }
+        .contact-email:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
 
-        /* Responsive */
-        @media (max-width: 640px) {
-            .hero-content { padding: 56px 24px 52px; }
-            .logo-mark { font-size: 2.6em; }
+        /* === FOOTER === */
+        footer {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 48px 32px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75em;
+            color: var(--text-ghost);
+        }
+        footer .accent { color: var(--orange); }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { min-height: 420px; }
+            .hero-content { padding: 56px 24px; }
+            .section { padding: 64px 24px; }
+            .serve-grid { grid-template-columns: 1fr; }
             .services-grid { grid-template-columns: 1fr; }
-            .serve-questions { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 1em; }
-            .comparison-table { font-size: 0.8em; }
-            .comparison-table thead th,
-            .comparison-table tbody td { padding: 9px 10px; }
-            .leadership { flex-direction: column; align-items: center; text-align: center; }
+            .comparison { grid-template-columns: 1fr; }
+            .leadership-card { flex-direction: column; align-items: center; text-align: center; }
+            footer { flex-direction: column; gap: 8px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="banner">Not currently accepting new clients</div>
+    <div class="announce">Not currently accepting new clients</div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">C<span class="slash">/</span>EC</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#approach">Approach</a>
+                <a href="#leadership">Leadership</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
 
     <div class="hero">
-        <canvas class="hero-canvas" id="networkCanvas"></canvas>
+        <canvas class="hero-canvas" id="gridCanvas"></canvas>
+        <div class="hero-fade-top"></div>
         <div class="hero-content">
-            <div class="logo-mark">C<span class="slash">/</span>EC</div>
-            <h1>Crowder Enterprise Consulting</h1>
-            <div class="tagline">Practical cybersecurity services for growing international organizations.</div>
-            <div class="location">Ontario, Canada</div>
+            <div class="hero-eyebrow">Cybersecurity Consultancy</div>
+            <h1 class="hero-title">Crowder Enterprise<br>Consulting</h1>
+            <p class="hero-sub">Practical cybersecurity services for growing international organizations. Properly scoped. Personally delivered.</p>
+            <div class="hero-location">Ontario, Canada</div>
         </div>
-        <div class="hero-fade"></div>
+        <div class="hero-fade-bottom"></div>
     </div>
 
-    <div class="spacer"></div>
-
-    <div class="container">
-
-        <section>
-            <div class="section-title">About</div>
-            <p class="about-text">Boutique cybersecurity consultancy founded in 2016. We help small and mid-sized organizations get their security tooling right — properly configured, tuned, and working for your environment. No overselling, no shelfware.</p>
-        </section>
-
-        <section>
-            <div class="section-title">Who We Serve</div>
-            <p class="serve-intro">We work with growing businesses that have outpaced their security posture — usually a small IT team doing their best, with no dedicated security staff yet.</p>
-            <div class="serve-questions">
-                <div class="serve-question">Is your IT or network team overburdened by security issues they weren't hired to handle?</div>
-                <div class="serve-question">Are you expanding internationally or opening new offices and unsure about the security implications?</div>
-                <div class="serve-question">Are your security tools not working as expected, generating too much noise, or sitting on the shelf?</div>
-                <div class="serve-question">Do you need security expertise but can't justify a full-time hire or a six-figure consulting engagement?</div>
-            </div>
-            <p class="serve-closer">If any of these sound familiar, you're exactly who we built this practice for.</p>
-        </section>
-
-        <section>
-            <div class="section-title">Services</div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Security Tool Configuration</h3>
-                    <p>Get the most out of the tools you already own. SIEM tuning, log source onboarding, endpoint agent rollouts — we make sure your stack is doing what it's supposed to.</p>
-                </div>
-                <div class="service-card">
-                    <h3>MDR Deployment</h3>
-                    <p>Full MDR onboarding from scoping and agent rollout to integration and handoff. We make the transition smooth so you're not left figuring it out alone.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Detection Engineering</h3>
-                    <p>Custom detection content for your environment. We build and tune alert logic so your team spends less time on false positives and more time on what matters.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Post-Incident Recovery</h3>
-                    <p>If you've been hit with ransomware or a breach, we help you get back on your feet — rebuilding, hardening, and making sure it doesn't happen again.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Forward Deployed Analyst</h3>
-                    <p>Embedded security analysts who work directly alongside your team. Extra hands on deck when you need them, without the overhead of a full-time hire.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Virtual CISO</h3>
-                    <p>Strategic security leadership on a fractional basis. We help you build and maintain a security program, set priorities, and report to the board — without the executive price tag.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-title">Why Boutique</div>
-            <p class="comparison-intro">Large firms sell you a brand name and a bench of junior consultants. We give you senior practitioners who know your environment and actually do the work.</p>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th class="us">C/EC</th>
-                        <th>Big Consultancy</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Team Composition</td>
-                        <td class="us">Right-sized to your needs from our professional network</td>
-                        <td>Pre-packaged team, often junior-heavy</td>
-                    </tr>
-                    <tr>
-                        <td>Pricing</td>
-                        <td class="us">Cost-effective, scoped to actual work</td>
-                        <td>High overhead, billable hour incentives</td>
-                    </tr>
-                    <tr>
-                        <td>Service Range</td>
-                        <td class="us">Forward deployed analyst through vCISO</td>
-                        <td>Rigid engagement tiers</td>
-                    </tr>
-                    <tr>
-                        <td>Point of Contact</td>
-                        <td class="us">Direct access to senior practitioners</td>
-                        <td>Account manager layer between you and the work</td>
-                    </tr>
-                    <tr>
-                        <td>Flexibility</td>
-                        <td class="us">Scale up or down as needs change</td>
-                        <td>Locked into long-term contracts</td>
-                    </tr>
-                    <tr>
-                        <td>Focus</td>
-                        <td class="us">Your environment, your problems</td>
-                        <td>Templated deliverables across clients</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section>
-            <div class="section-title">Leadership</div>
-            <div class="leadership">
-                <img src="edward.png" alt="Edward Crowder" class="leadership-photo">
-                <div class="leadership-info">
-                    <div class="name">Edward Crowder</div>
-                    <div class="title">Founder &amp; Principal Researcher</div>
-                    <p>Edward brings a decade of global technology experience to every engagement. A speaker at <strong>RSA Conference 2026</strong> and <strong>DEF CON 33</strong>, and a visiting researcher at the <strong>University of Waterloo</strong> and <strong>University of Guelph</strong>, he is personally involved in every client case alongside a hand-picked group of named professionals.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="section-title">Contact</div>
-            <p class="contact-text">Interested in working together in the future? Reach out at <strong>contact [at] crowdere [dot] com</strong> and we'll let you know when availability opens up.</p>
-        </section>
-
+    <!-- ABOUT -->
+    <div class="section reveal" id="about">
+        <div class="section-label">About</div>
+        <h2 class="section-heading">Security tooling that actually works for your environment.</h2>
+        <p class="section-body">Boutique cybersecurity consultancy founded in 2016. We configure, tune, and deploy security infrastructure for small and mid-sized organizations — the ones too mature to ignore security, too lean to build a program in-house. No shelfware. No overselling.</p>
     </div>
 
-    <footer>Crowder Enterprise Consulting <span class="accent">/</span> Est. 2016</footer>
+    <!-- WHO WE SERVE -->
+    <div class="section reveal" id="serve">
+        <div class="section-label">Who We Serve</div>
+        <h2 class="section-heading">Built for organizations that have outpaced their security posture.</h2>
+        <p class="section-body">We typically work with growing businesses that have a small IT team, no dedicated security staff, and increasing exposure from expansion or compliance requirements.</p>
+        <div class="serve-grid">
+            <div class="serve-item">
+                <strong>Overburdened IT Teams</strong>
+                Your IT or network team is handling security issues they weren't hired for, and it's pulling them away from core work.
+            </div>
+            <div class="serve-item">
+                <strong>International Expansion</strong>
+                You're opening offices or onboarding staff in new regions and aren't sure how to extend your security posture across borders.
+            </div>
+            <div class="serve-item">
+                <strong>Underperforming Tools</strong>
+                Security tools aren't configured properly, generating too much noise, or sitting unused on the shelf entirely.
+            </div>
+            <div class="serve-item">
+                <strong>Right-Sized Expertise</strong>
+                You need real security help but can't justify a full-time hire or a six-figure engagement from a national firm.
+            </div>
+        </div>
+        <p class="serve-closer">If any of this sounds familiar, you're exactly who we built this practice for.</p>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="section reveal" id="services">
+        <div class="section-label">Services</div>
+        <h2 class="section-heading">From hands-on-keyboard to boardroom strategy.</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <h3>Security Tool Configuration</h3>
+                <p>SIEM tuning, log source onboarding, endpoint rollouts. We make the tools you already own work the way they should.</p>
+            </div>
+            <div class="service-item">
+                <h3>MDR Deployment</h3>
+                <p>Full managed detection and response onboarding — scoping, agent rollout, integration, and handoff to your operations team.</p>
+            </div>
+            <div class="service-item">
+                <h3>Detection Engineering</h3>
+                <p>Custom detection logic tuned to your environment. Less noise, fewer false positives, more signal.</p>
+            </div>
+            <div class="service-item">
+                <h3>Post-Incident Recovery</h3>
+                <p>Ransomware recovery, environment hardening, and root cause analysis. Get back on your feet and stay there.</p>
+            </div>
+            <div class="service-item">
+                <h3>Forward Deployed Analyst</h3>
+                <p>Embedded practitioners working alongside your team. Senior capability without the full-time overhead.</p>
+            </div>
+            <div class="service-item">
+                <h3>Virtual CISO</h3>
+                <p>Fractional security leadership. Program development, board reporting, and strategic planning on your terms.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHY BOUTIQUE -->
+    <div class="section reveal" id="approach">
+        <div class="section-label">Why Boutique</div>
+        <h2 class="section-heading">Senior practitioners. No account manager between you and the work.</h2>
+        <p class="section-body">Large firms sell a brand name and a bench of junior consultants. We give you named professionals who know your environment and do the work themselves.</p>
+        <div class="comparison">
+            <div class="comparison-col us">
+                <div class="comparison-header">C/EC</div>
+                <div class="comparison-row">
+                    <div class="row-label">Team</div>
+                    Right-sized from our professional network
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Pricing</div>
+                    Cost-effective, scoped to actual work
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Range</div>
+                    Forward deployed analyst through vCISO
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Access</div>
+                    Direct to senior practitioners
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Flexibility</div>
+                    Scale as needs change
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Focus</div>
+                    Your environment, your problems
+                </div>
+            </div>
+            <div class="comparison-col them">
+                <div class="comparison-header">Big Consultancy</div>
+                <div class="comparison-row">
+                    <div class="row-label">Team</div>
+                    Pre-packaged, often junior-heavy
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Pricing</div>
+                    High overhead, billable hour incentives
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Range</div>
+                    Rigid engagement tiers
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Access</div>
+                    Account manager layer
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Flexibility</div>
+                    Locked into long-term contracts
+                </div>
+                <div class="comparison-row">
+                    <div class="row-label">Focus</div>
+                    Templated deliverables
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LEADERSHIP -->
+    <div class="section reveal" id="leadership">
+        <div class="section-label">Leadership</div>
+        <h2 class="section-heading">Personally involved in every engagement.</h2>
+        <div class="leadership-card">
+            <img src="edward.png" alt="Edward Crowder" class="leadership-photo">
+            <div class="leadership-info">
+                <div class="name">Edward Crowder</div>
+                <div class="title">Founder &amp; Principal Researcher</div>
+                <p>Edward brings a decade of global technology experience to every engagement. A speaker at <strong>RSA Conference 2026</strong> and <strong>DEF CON 33</strong>, and a visiting researcher at the <strong>University of Waterloo</strong> and <strong>University of Guelph</strong>, he is personally involved in every client case alongside a hand-picked group of named professionals.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="section reveal" id="contact">
+        <div class="section-label">Contact</div>
+        <h2 class="section-heading">Interested in working together?</h2>
+        <p class="section-body">We'll let you know when availability opens up.</p>
+        <a href="mailto:contact@crowdere.com" class="contact-email">contact [at] crowdere [dot] com</a>
+    </div>
+
+    <footer>
+        <span>Crowder Enterprise Consulting <span class="accent">/</span> Est. 2016</span>
+        <span>Ontario, Canada</span>
+    </footer>
 
     <script>
+    // === GEOMETRIC GRID ANIMATION ===
     (function () {
-        const canvas = document.getElementById('networkCanvas');
+        const canvas = document.getElementById('gridCanvas');
         const ctx = canvas.getContext('2d');
-        let width, height, particles, mouse, animId;
-
-        const CONFIG = {
-            particleCount: 80,
-            connectionDist: 150,
-            mouseRadius: 200,
-            baseSpeed: 0.3,
-            particleMinSize: 1,
-            particleMaxSize: 2.5,
-            orange: { r: 232, g: 122, b: 30 },
-            white: { r: 255, g: 255, b: 255 }
-        };
+        let width, height, cols, rows, points, mouse;
+        const SPACING = 48;
+        const ORANGE = { r: 232, g: 122, b: 30 };
 
         mouse = { x: -1000, y: -1000 };
 
@@ -424,126 +598,113 @@
             const hero = canvas.parentElement;
             width = canvas.width = hero.offsetWidth;
             height = canvas.height = hero.offsetHeight;
+            buildGrid();
         }
 
-        function createParticle() {
-            const isOrange = Math.random() < 0.35;
-            const color = isOrange ? CONFIG.orange : CONFIG.white;
-            const brightness = isOrange ? 1 : (0.15 + Math.random() * 0.25);
-            return {
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * CONFIG.baseSpeed,
-                vy: (Math.random() - 0.5) * CONFIG.baseSpeed,
-                size: CONFIG.particleMinSize + Math.random() * (CONFIG.particleMaxSize - CONFIG.particleMinSize),
-                color: color,
-                alpha: brightness,
-                isOrange: isOrange,
-                pulseOffset: Math.random() * Math.PI * 2
-            };
-        }
-
-        function init() {
-            resize();
-            particles = [];
-            for (let i = 0; i < CONFIG.particleCount; i++) {
-                particles.push(createParticle());
-            }
-        }
-
-        function drawParticle(p, time) {
-            const pulse = p.isOrange
-                ? p.alpha * (0.6 + 0.4 * Math.sin(time * 0.002 + p.pulseOffset))
-                : p.alpha;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${p.color.r},${p.color.g},${p.color.b},${pulse})`;
-            ctx.fill();
-        }
-
-        function drawConnections(time) {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < CONFIG.connectionDist) {
-                        const opacity = (1 - dist / CONFIG.connectionDist) * 0.15;
-                        const useOrange = particles[i].isOrange || particles[j].isOrange;
-                        const c = useOrange ? CONFIG.orange : CONFIG.white;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(${c.r},${c.g},${c.b},${opacity})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            // Mouse connections
-            for (let i = 0; i < particles.length; i++) {
-                const dx = particles[i].x - mouse.x;
-                const dy = particles[i].y - mouse.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < CONFIG.mouseRadius) {
-                    const opacity = (1 - dist / CONFIG.mouseRadius) * 0.25;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(mouse.x, mouse.y);
-                    ctx.strokeStyle = `rgba(${CONFIG.orange.r},${CONFIG.orange.g},${CONFIG.orange.b},${opacity})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
+        function buildGrid() {
+            points = [];
+            cols = Math.ceil(width / SPACING) + 2;
+            rows = Math.ceil(height / SPACING) + 2;
+            const offsetX = (width - (cols - 1) * SPACING) / 2;
+            const offsetY = (height - (rows - 1) * SPACING) / 2;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    points.push({
+                        baseX: offsetX + c * SPACING,
+                        baseY: offsetY + r * SPACING,
+                        x: offsetX + c * SPACING,
+                        y: offsetY + r * SPACING,
+                        col: c,
+                        row: r,
+                        phase: Math.random() * Math.PI * 2,
+                        amplitude: 1.5 + Math.random() * 2,
+                        isNode: Math.random() < 0.06
+                    });
                 }
             }
         }
 
-        function update() {
-            for (let p of particles) {
-                // Mouse repulsion
-                const dx = p.x - mouse.x;
-                const dy = p.y - mouse.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < CONFIG.mouseRadius && dist > 0) {
-                    const force = (1 - dist / CONFIG.mouseRadius) * 0.02;
-                    p.vx += (dx / dist) * force;
-                    p.vy += (dy / dist) * force;
-                }
-
-                // Damping
-                p.vx *= 0.99;
-                p.vy *= 0.99;
-
-                // Speed limit
-                const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-                if (speed > 1.2) {
-                    p.vx = (p.vx / speed) * 1.2;
-                    p.vy = (p.vy / speed) * 1.2;
-                }
-
-                p.x += p.vx;
-                p.y += p.vy;
-
-                // Wrap edges
-                if (p.x < -10) p.x = width + 10;
-                if (p.x > width + 10) p.x = -10;
-                if (p.y < -10) p.y = height + 10;
-                if (p.y > height + 10) p.y = -10;
-            }
+        function getPoint(c, r) {
+            if (c < 0 || c >= cols || r < 0 || r >= rows) return null;
+            return points[r * cols + c];
         }
 
         function animate(time) {
             ctx.clearRect(0, 0, width, height);
-            update();
-            drawConnections(time);
-            for (let p of particles) {
-                drawParticle(p, time);
+            const t = time * 0.001;
+
+            // Update positions with subtle wave
+            for (let p of points) {
+                p.x = p.baseX + Math.sin(t * 0.4 + p.phase) * p.amplitude;
+                p.y = p.baseY + Math.cos(t * 0.3 + p.phase * 1.3) * p.amplitude;
             }
-            animId = requestAnimationFrame(animate);
+
+            // Draw grid lines
+            for (let p of points) {
+                const right = getPoint(p.col + 1, p.row);
+                const down = getPoint(p.col, p.row + 1);
+
+                const dx = p.x - mouse.x;
+                const dy = p.y - mouse.y;
+                const mouseDist = Math.sqrt(dx * dx + dy * dy);
+                const mouseInfluence = Math.max(0, 1 - mouseDist / 260);
+
+                const baseAlpha = 0.04;
+                const alpha = baseAlpha + mouseInfluence * 0.12;
+                const useOrange = mouseInfluence > 0.2;
+                const color = useOrange
+                    ? `rgba(${ORANGE.r},${ORANGE.g},${ORANGE.b},${alpha})`
+                    : `rgba(255,255,255,${alpha})`;
+
+                if (right) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(right.x, right.y);
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+                if (down) {
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(down.x, down.y);
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+
+            // Draw intersection dots
+            for (let p of points) {
+                const dx = p.x - mouse.x;
+                const dy = p.y - mouse.y;
+                const mouseDist = Math.sqrt(dx * dx + dy * dy);
+                const mouseInfluence = Math.max(0, 1 - mouseDist / 260);
+
+                if (p.isNode || mouseInfluence > 0.5) {
+                    const size = p.isNode ? 1.8 : 1.2 + mouseInfluence * 1.5;
+                    const nodeAlpha = p.isNode
+                        ? 0.3 + 0.2 * Math.sin(t * 2 + p.phase)
+                        : mouseInfluence * 0.6;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${ORANGE.r},${ORANGE.g},${ORANGE.b},${nodeAlpha})`;
+                    ctx.fill();
+                }
+            }
+
+            // Mouse glow
+            if (mouse.x > 0) {
+                const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 200);
+                gradient.addColorStop(0, `rgba(${ORANGE.r},${ORANGE.g},${ORANGE.b},0.03)`);
+                gradient.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            }
+
+            requestAnimationFrame(animate);
         }
 
-        // Events
         const hero = canvas.parentElement;
         hero.addEventListener('mousemove', function (e) {
             const rect = hero.getBoundingClientRect();
@@ -555,12 +716,22 @@
             mouse.y = -1000;
         });
 
-        window.addEventListener('resize', function () {
-            resize();
-        });
+        window.addEventListener('resize', resize);
+        resize();
+        requestAnimationFrame(animate);
+    })();
 
-        init();
-        animate(0);
+    // === SCROLL REVEAL ===
+    (function () {
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.08 });
+        reveals.forEach(function (el) { observer.observe(el); });
     })();
     </script>
 
